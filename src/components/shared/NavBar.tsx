@@ -1,10 +1,17 @@
+
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import MobileMenu from "./MobileMenu";
 import { publicNavLinks } from "@/constants/navigation";
 import Link from "next/link";
+import { getUserSession } from "@/lib/core/session";
 
-export default function Navbar() {
+import LogoutButton from "../ui/LogOutButton";
+
+export default async function Navbar () {
+  const user =await getUserSession()
+  console.log("USer",user);
+
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
@@ -16,6 +23,13 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Auth */}
+
+      {
+        user ? <div className="flex gap-2 items-center">
+          <h1 className="font-bold">Hi, {user.name}</h1>
+          <LogoutButton/>
+          </div>:
+  
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/login"
@@ -31,6 +45,7 @@ export default function Navbar() {
             Register
           </Link>
         </div>
+      }
 
         {/* Mobile */}
         <MobileMenu links={publicNavLinks} />

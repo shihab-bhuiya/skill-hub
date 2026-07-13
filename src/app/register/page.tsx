@@ -7,37 +7,43 @@ import AuthCard from "@/components/ui/AuthCard";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
        const [formData, setFormData] = useState({
         email: "",
+        name:"",
         password: "",
     });
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
     
-        const handleSubmit = async (e) => {
-        e.preventDefault();
 
-        const { data, error } = await authClient.signIn.email({
-            email: formData.email,
-            password: formData.password,
-            rememberMe: true,
-            callbackURL: "/",
-        });
+       const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
 
-        if (data) {
-            toast.success("Login Successfully");
-            redirect("/");
-        } else {
-            toast.error(error?.message || "Something went wrong");
-        }
-    };
+  const { data, error } = await authClient.signUp.email({
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
+    callbackURL: "/",
+  });
+
+  if (data) {
+    toast.success("Account created successfully");
+    redirect("/")
+  } else {
+    toast.error(error?.message || "Something went wrong");
+    console.log("Error",error);
+  }
+};
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
@@ -46,25 +52,34 @@ export default function RegisterPage() {
         subtitle="Join SkillHub and start learning today."
       >
         <form onSubmit={handleSubmit} className="space-y-5">
-          <Input
-            id="name"
-            label="Full Name"
-            placeholder="Enter your full name"
-          />
+         <Input
+      id="name"
+     name="name"
+     label="Full Name"
+     placeholder="Enter your full name"
+     value={formData.name}
+     onChange={handleChange}
+    />
 
-          <Input
-            id="email"
-            label="Email"
-            type="email"
-            placeholder="Enter your email"
-          />
+      <Input
+  id="email"
+  name="email"
+  type="email"
+  label="Email"
+  placeholder="Enter your email"
+  value={formData.email}
+  onChange={handleChange}
+/>
 
-          <Input
-            id="password"
-            label="Password"
-            type="password"
-            placeholder="Create a password"
-          />
+       <Input
+  id="password"
+  name="password"
+  type="password"
+  label="Password"
+  placeholder="Create a password"
+  value={formData.password}
+  onChange={handleChange}
+/>
 
           <Button type="submit">
             Register

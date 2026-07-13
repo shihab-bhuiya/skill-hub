@@ -2,10 +2,46 @@
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
+import toast from "react-hot-toast";
+;
 
 
 export default function LoginPage() {
+   const [formData, setFormData] = useState({
+          email: "",
+          password: "",
+      });
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+      
+  
+         const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+  
+    const { data, error } = await authClient.signIn.email({
+      email: formData.email,
+      password: formData.password,
+      callbackURL: "/",
+    });
+  
+    if (data) {
+      toast.success("Login successfully");
+    } else {
+      toast.error(error?.message || "Something went wrong");
+      // alert(error?.message || "Something went wrong");
+      console.log("Error",error);
+    }
+  };
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
@@ -17,19 +53,23 @@ export default function LoginPage() {
           Login to your SkillHub account
         </p>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <Input
             id="email"
+            name="email"
             label="Email"
             type="email"
             placeholder="Enter your email"
+              onChange={handleChange}
           />
 
           <Input
             id="password"
+            name="password"
             label="Password"
             type="password"
             placeholder="Enter your password"
+              onChange={handleChange}
           />
 
           <Button type="submit">
