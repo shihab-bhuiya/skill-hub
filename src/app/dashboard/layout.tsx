@@ -1,16 +1,25 @@
-import { getUserSession } from "@/lib/core/session";
-import { redirect } from "next/navigation";
+import Sidebar from "@/components/DashBoard/Sidebar";
+import Topbar from "@/components/DashBoard/Topbar";
+import { ReactNode } from "react";
 
-export default async function DashboardLayout({
+type DashboardLayoutProps = {
+  children: ReactNode;
+};
+
+export default function DashboardLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  const user = await getUserSession();
+}: DashboardLayoutProps) {
+  return (
+    <div className="flex min-h-screen bg-gray-100">
+      <Sidebar />
 
-  if (!user) {
-    redirect('/login')
-  }
+      <div className="flex flex-1 flex-col">
+        <Topbar />
 
-  return <>{children}</>;
+        <main className="flex-1 p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
 }

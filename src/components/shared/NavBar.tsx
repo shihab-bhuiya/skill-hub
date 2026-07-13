@@ -20,8 +20,11 @@ export default async function Navbar () {
         {/* Desktop Navigation */}
         <div className="hidden md:flex">
           <NavLinks links={publicNavLinks} />
+{
+  user && <div className="gap-3 ml-5"><Link href={'/dashboard'}>
+    Dashboard</Link></div>
+}
         </div>
-
         {/* Desktop Auth */}
 
       {
