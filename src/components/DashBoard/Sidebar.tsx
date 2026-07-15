@@ -1,11 +1,9 @@
-"use client";
-
-import DashboardNav from "./DashboardNav";
 import Link from "next/link";
+import DashboardNav from "./DashboardNav";
+import { getUserSession } from "@/lib/core/session";
 
-export default function Sidebar() {
-  // Replace this later with your Better Auth session
-  const role: "admin" | "user" = "admin";
+export default async function Sidebar() {
+  const user = await getUserSession();
 
   return (
     <aside className="hidden w-64 border-r bg-white md:block">
@@ -19,7 +17,7 @@ export default function Sidebar() {
       </div>
 
       <div className="p-4">
-        <DashboardNav role={role} />
+        <DashboardNav role={user?.role as "admin" | "user"} />
       </div>
     </aside>
   );
