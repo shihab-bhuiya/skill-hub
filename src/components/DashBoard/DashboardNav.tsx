@@ -51,8 +51,8 @@ export default function DashboardNav({
       icon: LayoutDashboard,
     },
     {
-      name: "Add Course",
-      href: "/dashboard/add-course",
+      name: "My Course",
+      href: "/dashboard/my-course",
       icon: PlusCircle,
     },
   ];
