@@ -7,6 +7,7 @@ import {
   Users,
   BookOpen,
   PlusCircle,
+  AdIcon,
 } from "lucide-react";
 
 
@@ -36,6 +37,11 @@ export default function DashboardNav({
       href: "/dashboard/manage-courses",
       icon: BookOpen,
     },
+    {
+      name:"Add-Course",
+      href:"/dashboard/add-courses",
+      icon:AdIcon,
+    }
   ];
 
   const userLinks = [
