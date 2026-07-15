@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 type ImgBBResponse = {
@@ -12,27 +12,9 @@ type ImgBBResponse = {
 };
 
 export default function AddCoursePage() {
-  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-const [formData, setFormData] = useState({
-  title: "",
-  instructor: "",
-  category: "",
-  level: "",
-  duration: "",
-  price: "",
-  thumbnail: "",
-  description: "",
-});
-const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value,
-  });
-};
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -42,66 +24,66 @@ const handleChange = (
 
     const form = e.currentTarget;
 
-    const imageInput = form.elements.namedItem(
-      "image"
-    ) as HTMLInputElement;
-
-    const image = imageInput.files?.[0];
-
-    if (!image) {
-      toast.error("Please select an image.");
-      setLoading(false);
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", image);
-
     try {
+      // =============================
+      // Get Image
+      // =============================
+      const imageInput = form.elements.namedItem(
+        "image"
+      ) as HTMLInputElement;
+
+      const image = imageInput.files?.[0];
+
+      if (!image) {
+        toast.error("Please select an image");
+        setLoading(false);
+        return;
+      }
+
+      // =============================
       // Upload Image to ImgBB
+      // =============================
+      const imageFormData = new FormData();
+      imageFormData.append("image", image);
+
       const imgRes = await fetch(
         `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_API}`,
         {
           method: "POST",
-          body: formData,
+          body: imageFormData,
         }
       );
 
       const imgData: ImgBBResponse = await imgRes.json();
 
       if (!imgData.success) {
-        toast.error("Image upload failed.");
+        toast.error("Image upload failed");
         setLoading(false);
         return;
       }
 
+      // =============================
+      // Create Course Object
+      // =============================
       const course = {
         title: (
           form.elements.namedItem("title") as HTMLInputElement
         ).value,
         instructor: (
-          form.elements.namedItem(
-            "instructor"
-          ) as HTMLInputElement
+          form.elements.namedItem("instructor") as HTMLInputElement
         ).value,
         category: (
-          form.elements.namedItem(
-            "category"
-          ) as HTMLInputElement
+          form.elements.namedItem("category") as HTMLInputElement
         ).value,
         level: (
           form.elements.namedItem("level") as HTMLInputElement
         ).value,
         duration: (
-          form.elements.namedItem(
-            "duration"
-          ) as HTMLInputElement
+          form.elements.namedItem("duration") as HTMLInputElement
         ).value,
         price: Number(
           (
-            form.elements.namedItem(
-              "price"
-            ) as HTMLInputElement
+            form.elements.namedItem("price") as HTMLInputElement
           ).value
         ),
         thumbnail: imgData.data.display_url,
@@ -112,45 +94,34 @@ const handleChange = (
         ).value,
       };
 
-      console.log(course);
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+      console.log("Course:", course);
 
-  const res = await fetch("http://localhost:5000/courses", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...formData,
-      price: Number(formData.price),
-    }),
-  });
+      // =============================
+      // Save Course to Backend
+      // =============================
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(course),
+        }
+      );
 
-  if (res.ok) {
-    toast.success("Course Added Successfully");
+      if (!res.ok) {
+        throw new Error("Failed to add course");
+      }
 
-    setFormData({
-      title: "",
-      instructor: "",
-      category: "",
-      level: "",
-      duration: "",
-      price: "",
-      thumbnail: "",
-      description: "",
-    });
+      toast.success("Course Added Successfully!");
 
-    router.push("/dashboard/manage-courses");
-  } else {
-    toast.error("Something went wrong");
-  }
-};
-      toast.success("Course added successfully!");
       form.reset();
+
+      router.push("/dashboard/manage-courses");
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong.");
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }
@@ -162,10 +133,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         Add Course
       </h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5"
-      >
+      <form onSubmit={handleSubmit} className="space-y-5">
         <input
           name="title"
           type="text"
@@ -232,7 +200,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         <button
           type="submit"
           disabled={loading}
-          className="rounded bg-blue-600 px-6 py-3 text-white disabled:bg-gray-400"
+          className="rounded bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 disabled:bg-gray-400"
         >
           {loading ? "Uploading..." : "Add Course"}
         </button>
