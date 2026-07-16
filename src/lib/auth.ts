@@ -23,6 +23,14 @@ export const auth = betterAuth({
         client,
     }),
 
+    baseURL: process.env.BETTER_AUTH_URL, // your backend's deployed URL
+    secret: process.env.BETTER_AUTH_SECRET, // make sure this exists too
+
+    trustedOrigins: [
+        "https://skill-hub-git-main-shihab-bhuiyas-projects.vercel.app/", // your deployed frontend
+        "http://localhost:3000", // keep for local dev if needed
+    ],
+
     emailAndPassword: {
         enabled: true,
     },
