@@ -1,3 +1,4 @@
+import Categories from "@/components/HomePage/Categories";
 import FeaturedCourses from "@/components/HomePage/FeaturedCourses";
 import Hero from "@/components/HomePage/Hero";
 
@@ -9,7 +10,7 @@ export default function Home() {
 <Hero/>
 <FeaturedCourses/>
 
-
+<Categories/>
     </div>
   );
 }
