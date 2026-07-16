@@ -234,8 +234,7 @@ Password:
 ---
 
 # 📷 Screenshots
-
-You can add screenshots here.
+![alt text](image.png)
 
 - Home Page
 - Dashboard
@@ -263,7 +262,7 @@ You can add screenshots here.
 
 # 👨‍💻 Developer
 
-**Shihab Bey**
+**Shihab Bhuiya**
 
 📧 Email
 
@@ -271,11 +270,7 @@ shihab.bhuiya07@gmail.com
 
 💼 LinkedIn
 
-https://www.linkedin.com/in/YOUR-LINKEDIN
-
-💻 GitHub
-
-https://github.com/YOUR-GITHUB
+https://www.linkedin.com/in/shihab-bhuiya
 
 ---
 
