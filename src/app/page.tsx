@@ -1,6 +1,7 @@
 import Categories from "@/components/HomePage/Categories";
 import FeaturedCourses from "@/components/HomePage/FeaturedCourses";
 import Hero from "@/components/HomePage/Hero";
+import WhyChooseUs from "@/components/HomePage/WhyChooseUs";
 
 
 export default function Home() {
@@ -11,6 +12,8 @@ export default function Home() {
 <FeaturedCourses/>
 
 <Categories/>
+<WhyChooseUs/>
+
     </div>
   );
 }
