@@ -7,11 +7,11 @@ const testimonials = [
     image: "https://i.pravatar.cc/150?img=5",
   },
   {
-    name: "John Smith",
+    name: "Shihab Bhuiya",
     role: "Software Engineer",
     review:
       "The instructors explain complex topics clearly. Building projects boosted my confidence.",
-    image: "https://i.pravatar.cc/150?img=12",
+    image: "https://ibb.co.com/dsq50dcm",
   },
   {
     name: "Ayesha Khan",
