@@ -1,3 +1,4 @@
+import EnrollButton from "@/components/course/EnrollButton";
 import Link from "next/link";
 
 type Course = {
@@ -83,9 +84,7 @@ export default async function CourseDetailsPage({
             </p>
           </div>
 
-          <button className="mt-8 rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700">
-            Enroll Now
-          </button>
+          <EnrollButton courseId={course._id}/>
         </div>
       </div>
     </section>
