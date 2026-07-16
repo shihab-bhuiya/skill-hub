@@ -21,6 +21,7 @@ export default function Home() {
 <Testimonials/>
 <FAQ/>
 <Newsletter/>
+
     </div>
   );
 }
