@@ -23,7 +23,7 @@ export default function LoginPage() {
   // Demo Admin Credentials
   const fillAdminCredentials = () => {
     setFormData({
-      email: "admin@example.com", // Replace with your admin email
+      email: "admin@gmail.com", // Replace with your admin email
       password: "admin123", // Replace with your admin password
     });
   };
@@ -31,8 +31,8 @@ export default function LoginPage() {
   // Demo User Credentials
   const fillUserCredentials = () => {
     setFormData({
-      email: "user@example.com", // Replace with your user email
-      password: "user123", // Replace with your user password
+      email: "user@gmail.com", // Replace with your user email
+      password: "users123", // Replace with your user password
     });
   };
 
