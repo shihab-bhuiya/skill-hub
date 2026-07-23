@@ -188,7 +188,11 @@ npm run dev
 ## Frontend (.env.local)
 
 ```env
-NEXT_PUBLIC_SERVER_URL=YOUR_BACKEND_URL
+BETTER_AUTH_SECRET=Your_Better_Auth_Secrect
+BETTER_AUTH_URL=Your_local_or_deployment_urls
+MONGO_URI=Your_MongoDb_URI
+NEXT_PUBLIC_SERVER_URL=Your_Backend_Server_urls
+NEXT_PUBLIC_IMAGE_AP=ImgBB_api_urls
 ```
 
 ---
@@ -200,9 +204,6 @@ PORT=5000
 
 MONGO_URI=YOUR_MONGODB_URI
 
-BETTER_AUTH_SECRET=YOUR_SECRET
-
-BETTER_AUTH_URL=YOUR_BACKEND_URL
 ```
 
 ---
@@ -213,23 +214,23 @@ BETTER_AUTH_URL=YOUR_BACKEND_URL
 
 ```
 Email:
-admin@example.com
+admin@gmail.com
 
 Password:
-********
+admin123
 ```
 
 ## User
 
 ```
 Email:
-user@example.com
+user@gmail.com
 
 Password:
-********
+users123
 ```
 
-> Replace these with your actual demo credentials before submission.
+
 
 ---
 
