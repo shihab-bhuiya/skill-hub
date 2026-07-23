@@ -28,7 +28,7 @@ export const auth = betterAuth({
 
     trustedOrigins: [
         "http://localhost:3000",
-        "https://skill-hub-git-main-shihab-bhuiyas-projects.vercel.app",
+        "https://skill-hub-ruddy.vercel.app",
     ],
 
     emailAndPassword: {
