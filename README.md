@@ -7,7 +7,7 @@ SkillHub is a modern full-stack Course Marketplace where students can discover, 
 ## 🌐 Live Demo
 
 ### Frontend
-https://skill-hub-git-main-shihab-bhuiyas-projects.vercel.app
+https://skill-hub-ruddy.vercel.app
 
 ### Backend API
 https://skill-hub-server-tau.vercel.app

@@ -17,14 +17,17 @@ export default function EnrollButton({
   const handleEnroll = async () => {
     // Get current session
     const session = await authClient.getSession();
-
+    
+    
     if (!session.data?.user) {
       toast.error("Please login first");
       router.push("/login");
       return;
     }
-
+    
     const user = session.data.user;
+
+
 
     const enrollment = {
       courseId,
