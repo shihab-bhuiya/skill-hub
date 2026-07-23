@@ -1,5 +1,6 @@
 import DeleteCourseButton from "@/components/DashBoard/DeleteCourseButton";
 import { getUserSession } from "@/lib/core/session";
+import Link from "next/link";
 
 
 type Course = {
@@ -60,9 +61,11 @@ export default async function ManageCoursesPage() {
 
               <td className="border p-3">
                 <div className="flex gap-2">
+                  <Link href={`/courses/${course._id}`}>
                   <button className="bg-green-500 text-white px-3 py-1 rounded">
                     View
                   </button>
+                  </Link>
 
                   <button className="bg-red-500 text-white px-3 py-1 rounded">
                     <DeleteCourseButton id={course._id}/>
