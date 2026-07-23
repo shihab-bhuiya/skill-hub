@@ -6,6 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
+
 ;
 
 
@@ -75,6 +76,11 @@ export default function LoginPage() {
           <Button type="submit">
             Login
           </Button>
+          <div className="text-center w-full  items-center border-2 rounded-xl p-2">
+            <button className="">
+              Continue With Google
+            </button>
+          </div>
         </form>
 
         <p className="mt-6 text-center text-sm">
