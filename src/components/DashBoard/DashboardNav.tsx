@@ -52,7 +52,7 @@ export default function DashboardNav({
     },
     {
       name: "My Course",
-      href: "/dashboard/my-course",
+      href: "/dashboard/my-courses",
       icon: PlusCircle,
     },
   ];
