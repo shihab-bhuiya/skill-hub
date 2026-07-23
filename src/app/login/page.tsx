@@ -22,6 +22,12 @@ export default function LoginPage() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const signInWithGoogle = async () => {
+   await authClient.signIn.social({
+    provider: "google",
+  });
+};
       
   
          const handleSubmit = async (
@@ -77,7 +83,7 @@ export default function LoginPage() {
             Login
           </Button>
           <div className="text-center w-full  items-center border-2 rounded-xl p-2">
-            <button className="">
+            <button className="" onClick={signInWithGoogle}>
               Continue With Google
             </button>
           </div>

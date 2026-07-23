@@ -22,6 +22,13 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     [e.target.name]: e.target.value,
   });
 };
+
+  const signInWithGoogle = async () => {
+   await authClient.signIn.social({
+    provider: "google",
+  });
+};
+     
     
 
        const handleSubmit = async (
@@ -84,6 +91,11 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <Button type="submit">
             Register
           </Button>
+              <div className="text-center w-full  items-center border-2 rounded-xl p-2">
+            <button className="" onClick={signInWithGoogle}>
+              Continue With Google
+            </button>
+          </div>
         </form>
 
         <p className="mt-6 text-center text-sm">
